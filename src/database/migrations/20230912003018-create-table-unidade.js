@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      nickname: {
+      active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
