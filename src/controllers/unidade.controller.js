@@ -31,6 +31,35 @@ class UnidadeController {
       });
     }
   }
+  async atualizarUnidade(req, res) {
+    try {
+      const { id } = req.params;
+      const { nickname, address, brand, model, active } = req.body;
+      console.log(active);
+      console.log(address);
+      const updatedData = Object.assign(
+        {},
+        nickname && { nickname },
+        address && { address },
+        brand && { brand },
+        model && { model },
+        typeof active === "boolean" && { active }
+      );
+      console.log(updatedData);
+      const response = await Unidade.update(updatedData, {
+        where: { id: id },
+      });
+
+      if (response[0] == 0)
+        return res.status(404).send("Unidade não encontrada ou campo inválido");
+      return res.status(200).send(updatedData);
+    } catch (err) {
+      return res.status(400).send({
+        message: "Falha na atualização dos dados",
+        cause: err.message,
+      });
+    }
+  }
 }
 
 module.exports = new UnidadeController();

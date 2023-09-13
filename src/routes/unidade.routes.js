@@ -1,6 +1,7 @@
 const {
   listarUnidades,
   criarUnidade,
+  atualizarUnidade,
 } = require("../controllers/unidade.controller");
 
 const { Router } = require("express");
@@ -10,6 +11,7 @@ class UnidadeRouter {
     const unidadeRoutes = Router();
     unidadeRoutes.get("/unidade", listarUnidades);
     unidadeRoutes.post("/unidade", criarUnidade);
+    unidadeRoutes.put("/unidade/:id", atualizarUnidade);
     return unidadeRoutes;
   }
 }
