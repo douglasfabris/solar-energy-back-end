@@ -35,8 +35,6 @@ class UnidadeController {
     try {
       const { id } = req.params;
       const { nickname, address, brand, model, active } = req.body;
-      console.log(active);
-      console.log(address);
       const updatedData = Object.assign(
         {},
         nickname && { nickname },
@@ -63,14 +61,10 @@ class UnidadeController {
   async excluirUnidade(req, res) {
     try {
       const { id } = req.params;
-      const unidade = await Unidade.findByPk(id, {
-        attributes: {
-          exclude: ["deletedAt"],
-        },
-      });
-      if (!unidade) return res.status(404).send("Unidade não encontrado");
+      const unidade = await Unidade.findByPk(id);
+      if (!unidade) return res.status(404).send("Unidade não encontrada");
       await Unidade.destroy({ where: { id: id } });
-      return res.status(204).send("Unidade deletado com sucesso");
+      return res.status(204).send("Unidade deletada com sucesso");
     } catch (err) {
       // Caso ocorre algum outro erro, retorna a sua causa
       return res.status(400).send({

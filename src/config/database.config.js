@@ -11,6 +11,6 @@ module.exports = {
   port: process.env.PORT,
   define: {
     underscored: true,
-    paranoid: true,
+    timestamps: false,
   },
 };
