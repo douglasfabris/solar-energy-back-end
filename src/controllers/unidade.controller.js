@@ -60,6 +60,25 @@ class UnidadeController {
       });
     }
   }
+  async excluirUnidade(req, res) {
+    try {
+      const { id } = req.params;
+      const unidade = await Unidade.findByPk(id, {
+        attributes: {
+          exclude: ["deletedAt"],
+        },
+      });
+      if (!unidade) return res.status(404).send("Unidade não encontrado");
+      await Unidade.destroy({ where: { id: id } });
+      return res.status(204).send("Unidade deletado com sucesso");
+    } catch (err) {
+      // Caso ocorre algum outro erro, retorna a sua causa
+      return res.status(400).send({
+        message: "Falha na exclusao da unidade",
+        cause: err.message,
+      });
+    }
+  }
 }
 
 module.exports = new UnidadeController();
