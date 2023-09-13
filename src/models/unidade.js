@@ -1,27 +1,30 @@
 const { connection } = require("../database/connection");
 const { STRING, BOOLEAN } = require("sequelize");
 
+
 const Unidade = connection.define("unidade", {
-  nickname: { 
+  nickname: {
     type: STRING,
     allowNull: false
   },
   address: {
     type: STRING,
-    allowNull: false 
+    allowNull: false
   },
-  brand: { 
-    type: STRING, 
-    allowNull: false 
+  brand: {
+    type: STRING,
+    allowNull: false
   },
   model: {
-    type: STRING, 
-    allowNull: false 
+    type: STRING,
+    allowNull: false
   },
-  active: { 
-    type: BOOLEAN, 
-    allowNull: false 
+  active: {
+    type: BOOLEAN,
+    allowNull: false
   },
+},{
+  tableName: "Unidade"
 });
 
 module.exports = { Unidade };
