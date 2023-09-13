@@ -11,7 +11,7 @@ const Usuario = connection.define(
       primaryKey: true,
     },
 
-    nome: {
+    name: {
       type: STRING,
       allowNull: false,
       validate: {
@@ -44,8 +44,14 @@ const Usuario = connection.define(
         },
       },
     },
-  }
+
+    // freezeTableName: true,
+
+    // paranoid: true,
+  },
+  { timestamps: false }
 );
+
 module.exports = {
   Usuario,
 };

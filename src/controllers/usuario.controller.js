@@ -1,15 +1,12 @@
 const { Usuario } = require("../models/usuario");
-const express = require("express");
-const { Router } = "express";
-const { config } = require("dotenv");
 const jwt = require("jsonwebtoken");
 
 class UsuarioController {
   async createOneUsuario(request, response) {
     try {
-      const { nome, email, senha } = request.body;
+      const { name, email, senha } = request.body;
 
-      if (!nome) {
+      if (!name) {
         return response.status(400).send({ message: "Nome obrigatório." });
       }
       if (!email) {
@@ -29,7 +26,7 @@ class UsuarioController {
           .send({ message: "Este email já está cadastrado." });
       }
       const data = await Usuario.create({
-        nome,
+        name,
         email,
         senha,
       });
@@ -57,7 +54,7 @@ class UsuarioController {
 
   async updateUsuario(request, response) {
     const { id } = request.params;
-    const { nome, senha } = request.body;
+    const { name, senha } = request.body;
     try {
       const usuario = await Usuario.findOne({ where: { id: id } });
       if (!usuario) {
@@ -65,10 +62,10 @@ class UsuarioController {
           .status(400)
           .json({ message: "Usuário não encontrado." });
       }
-      if (!nome || !senha) {
+      if (!name || !senha) {
         return response.status(400).send({ message: "Campo obrigatório." });
       }
-      usuario.nome = nome;
+      usuario.name = name;
       usuario.senha = senha;
 
       await usuario.save();
