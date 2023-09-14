@@ -9,5 +9,6 @@ module.exports = {
   port: process.env.PORT, //Qual porta do seu postgres (Normalmente é a 5432);
   define: {
     underscored: true,
+    timestamps: false,
   },
 };
