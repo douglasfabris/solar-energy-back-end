@@ -3,6 +3,7 @@ const {
   listarOneUsuario,
   updateUsuario,
   deleteUsuario,
+  login,
 } = require("../controllers/usuario.controller");
 const { Router } = require("express");
 
@@ -13,6 +14,7 @@ class UsuarioRouter {
     usuarioRoutes.get("/usuario/:id", listarOneUsuario);
     usuarioRoutes.put("/usuario/:id", updateUsuario);
     usuarioRoutes.delete("/usuario/:id", deleteUsuario);
+    usuarioRoutes.post("/login", login);
     return usuarioRoutes;
   }
 }

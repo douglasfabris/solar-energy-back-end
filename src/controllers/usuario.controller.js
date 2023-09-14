@@ -2,9 +2,34 @@ const { Usuario } = require("../models/usuario");
 const jwt = require("jsonwebtoken");
 
 class UsuarioController {
+  async login(request, response) {
+    const { email, senha } = request.body;
+
+    try {
+      const usuario = await Usuario.findOne({ where: { email } });
+      if (!usuario) {
+        return response.status(404).json({ message: "Email não encontrado." });
+      }
+      if (!senha !== usuario.senha) {
+        return response.status(401).json({ message: "Senha incorreta" });
+      }
+      const token = jwt.sign(
+        {
+          id_usuario: usuario,
+          email: usuario.email,
+        },
+        "lab365",
+        { expiresIn: "1h" }
+      );
+      return response.status(200).json({ token });
+    } catch (error) {
+      console.log(error);
+      return response.status(401).json({ message: "Erro no servidor." });
+    }
+  }
   async createOneUsuario(request, response) {
     try {
-      const { name, email, senha } = request.body;
+      const { name, email, senha, login } = request.body;
 
       if (!name) {
         return response.status(400).send({ message: "Nome obrigatório." });
