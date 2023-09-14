@@ -8,7 +8,7 @@ async function auth(req, res, next) {
     // Recebe o token enviado no headers da requisição
     const { authorization } = req.headers;
     // Verifica se a assinatura do token é válida e passa à próxima função da rota
-    req["payload"] = verify(authorization, process.env.SECRET_JWT);
+    req["payload"] = verify(authorization, "lab365");
     next();
   } catch (err) {
     // Caso ocorra erro, retorna a mensagem
