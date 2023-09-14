@@ -10,7 +10,7 @@ class UsuarioController {
       if (!usuario) {
         return response.status(404).json({ message: "Email não encontrado." });
       }
-      if (!senha !== usuario.senha) {
+      if (senha !== usuario.senha) {
         return response.status(401).json({ message: "Senha incorreta" });
       }
       const token = jwt.sign(
